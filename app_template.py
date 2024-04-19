@@ -3,7 +3,7 @@ import sys, os
 import argparse
 import time
 
-sys.path.append('..\\..\\..\\common')
+sys.path.append('..\\..\\wingoal_utils')
 from common import (
     set_log_file,
     log,
