@@ -3,6 +3,7 @@ import os.path
 from datetime import datetime as datetime
 import time
 import random
+import json as js
 
 
 g_log_file = None
@@ -60,6 +61,18 @@ def logs(title, *args):
     if g_log_file:
         print('%s:' % time_str(), title, file=g_log_file)
         print(*args, file=g_log_file)
+
+
+def load_json(file_name):
+    if not os.path.exists(file_name):
+        return None
+    with open(file_name, 'r', encoding='utf8') as f:
+        return js.load(f)
+
+
+def save_json(obj, file_name):
+    with open(file_name, 'w', encoding='utf8') as f:
+        js.dump(obj, f, indent=2, ensure_ascii=False)
 
 
 def get_train_params(vars):
