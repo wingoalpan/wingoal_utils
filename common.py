@@ -46,7 +46,7 @@ def set_log_file(file_name, suffix=None, timestamp = False):
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
 
-    g_log_file = open(log_file_name, mode='wt+')
+    g_log_file = open(log_file_name, mode='wt+', encoding='utf-8')
 
 
 def log(*args):
