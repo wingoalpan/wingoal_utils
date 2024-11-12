@@ -2,12 +2,11 @@
 import os.path
 from datetime import datetime as datetime
 import time
-import random
 import json as js
 
 
 g_log_file = None
-
+start = 0.
 
 def time_stamp():
     now = datetime.now()
@@ -21,10 +20,38 @@ def time_str():
     return stamp[:-3]
 
 
+def start_timer():
+    global start
+    start = time.time()
+    return start
+
+
+def get_start_time():
+    start_time = datetime.fromtimestamp(start)
+    return datetime.strftime(start_time, '%Y-%m-%d %H:%M:%S.%f')
+
+
+def time_elapse():
+    elapse = time.time() - start
+    elapse_seconds = elapse
+    days = int(elapse // (24 * 3600))
+    elapse %= 24 * 3600
+    hours = int(elapse // 3600)
+    elapse %= 3600
+    minutes = int(elapse // 60)
+    elapse %= 60
+    seconds = int(elapse)
+    elapse %= 1
+    milliseconds = int(elapse * 1000)
+    elapse *= 1000
+    microseconds = int(elapse * 1000)
+    return elapse_seconds, days, hours, minutes, seconds, milliseconds, microseconds
+
+
 def file_name_info(file_path):
     file_dir = os.path.dirname(file_path)
     file_name = os.path.split(file_path)[-1]
-    file_ext = name.split('.')
+    file_ext = file_name.split('.')
     return file_dir, file_name, file_ext
 
 
