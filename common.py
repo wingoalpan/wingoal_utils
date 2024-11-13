@@ -8,6 +8,7 @@ import json as js
 g_log_file = None
 start = 0.
 
+
 def time_stamp():
     now = datetime.now()
     stamp = datetime.strftime(now, '%Y%m%d%H%M%S.%f')
@@ -53,6 +54,16 @@ def file_name_info(file_path):
     file_name = os.path.split(file_path)[-1]
     file_ext = file_name.split('.')
     return file_dir, file_name, file_ext
+
+
+def diclist2dic(diclist, keys):
+    dics = dict()
+    if not isinstance(keys, list):
+        keys = [keys]
+    for dic in diclist:
+        key = ':'.join([str(dic[key]) for key in keys])
+        dics[key] = dic
+    return dics
 
 
 def set_log_file(file_name, suffix=None, timestamp = False):
